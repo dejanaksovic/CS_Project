@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "A2XH+5+YU3iZI+kLEbRC2IUgwbPMELFb/lYIX0vn/E+qAETus4R31h+bE3rVsWiqjKene7au3ehI+rUaNNoXCw==",
+  "dgSpecHash": "33gPx5nCi9exabiVYmHUHCEekoqP7KwTI1wVeush2Ra7MSdow3TWZbSLo4kZ+CKiMK6XDbCGUdO4I7n7DZlNCA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Desktop\\Repos\\C#\\GraphVisualization\\GraphVisual\\GraphVisual.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Desktop\\Repos\\CS_Project\\GraphVisual.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

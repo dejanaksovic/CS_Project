@@ -38,11 +38,29 @@
 
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Ellipse Width="30"
-                             Height="30"
+                    <Grid Width="30"                            
+                          Height="30">
+                        <Grid.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding ClickedNodeCommand}"/>
+                        </Grid.InputBindings>
+                        <Ellipse
                              Stroke="Black"
                              Fill="DarkOliveGreen"
-                             StrokeThickness="3"/>
+                             StrokeThickness="3">
+                        </Ellipse>
+                        <TextBlock
+                                   Foreground="Red"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   >
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{} {0}  {1}">
+                                    <Binding Path="ID"/>
+                                    <Binding Path="Value"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

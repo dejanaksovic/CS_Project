@@ -12,6 +12,8 @@ namespace GraphVisual.ViewModels
 {
     public class GraphControlViewModel : ViewModelBase
     {
+        Graph _graph;
+
         string _graphName;
         public string GraphName
         {
@@ -23,22 +25,6 @@ namespace GraphVisual.ViewModels
             {
                 _graphName = value;
                 OnPropertyChanged(nameof(GraphName));
-            }
-        }
-
-        int _selectedName;
-
-        public int SelectedName
-        {
-            get
-            {
-                return _selectedName;
-            }
-
-            set
-            {
-                _selectedName = value;
-                OnPropertyChanged(nameof(SelectedName));
             }
         }
 
@@ -58,11 +44,19 @@ namespace GraphVisual.ViewModels
 
         public GraphControlViewModel(Graph GRAPH)
         {
+            _graph = GRAPH;
             _graphName = GRAPH.Name;
+            _graph.IChanged += OnGraphChanged;
+
 
             AddNode = new AddNodeCommand(this, GRAPH);
             ChangeNode = new ChangeNodeCommand(this, GRAPH);
             AddEdge = new AddEdgeCommand(this, GRAPH);
+        }
+
+        public void OnGraphChanged(Graph sender)
+        {
+            
         }
     }
 }

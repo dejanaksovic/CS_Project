@@ -12,7 +12,7 @@ namespace GraphVisual.Models
 
         public Node SecondNode { get; }
 
-        int weight { get; set; }
+        public int weight { get; set; }
 
         public Edge(Node FIRST, Node SECOND, int WEIGHT)
         {

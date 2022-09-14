@@ -24,5 +24,7 @@ namespace GraphVisual.Views
         {
             InitializeComponent();
         }
+
+
     }
 }

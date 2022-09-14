@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\PC\Desktop\Repos\C#\GraphVisualization\GraphVisual\obj\Debug\net6.0-windows\
+C:\Users\PC\Desktop\Repos\CS_Project\obj\Debug\net6.0-windows\
 GraphVisual
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\PC\Desktop\Repos\C#\GraphVisualization\GraphVisual\App.xaml
+C:\Users\PC\Desktop\Repos\CS_Project\App.xaml
 41516473657
 
-21522032912
+23-1602203709
 1941905061893
 MainWindow.xaml;Views\Graph_control.xaml;Views\Graph_space.xaml;Views\Selected_control.xaml;
 
-False
+True
 

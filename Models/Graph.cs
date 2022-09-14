@@ -11,11 +11,15 @@ namespace GraphVisual.Models
     {
         public delegate void ChangeNodeHandler(int ID, string VALUE);
         public delegate void ChangeEdgeHandler(int ID_FIRST, int ID_SECOND, int WEIGHT);
+        public delegate void IChangedHandler(Graph source);
 
         public event ChangeNodeHandler NodeChanged;
         public event ChangeEdgeHandler EdgeChanged;
+        public event IChangedHandler IChanged;
 
         int currId = 0;
+
+        public Node CurrentSelected { set; get; }
 
         public List<Node> Nodes { get; } = new List<Node>();
 
@@ -23,23 +27,11 @@ namespace GraphVisual.Models
 
         public string Name { get; set; }
 
+        public Node? SelectedNode;
+
         public Graph(string Name)
         {
             this.Name = Name;
-        }
-
-        public void AddNode(string VALUE, float POSX, float POSY)
-        {
-            Node temp = new Node(currId++, VALUE, POSX, POSY);
-            NodeChanged += temp.HandleChange;
-            Nodes.Add(temp);
-        }
-
-        public void AddEdge(Node FIRST_NODE, Node SECOND_NODE, int WEIGHT)
-        {
-            Edge temp = new Edge(FIRST_NODE, SECOND_NODE, WEIGHT);
-            EdgeChanged += temp.HandleChange;
-            Edges.Add(temp);
         }
 
         public void OnNodeChanged(int ID, string VALUE)
@@ -51,5 +43,35 @@ namespace GraphVisual.Models
         {
             EdgeChanged?.Invoke(ID_FIRST, ID_SECOND, WEIGHT);
         }
+
+        public void OnIChanged()
+        {
+            IChanged?.Invoke(this);
+        }
+
+        public void AddNode(string VALUE, float POSX, float POSY)
+        {
+            Node temp = new Node(currId++, VALUE, POSX, POSY);
+            NodeChanged += temp.HandleChange;
+            temp.Clicked += OnNodeClicked;
+            Nodes.Add(temp);
+            OnIChanged();
+        }
+
+        public void AddEdge(Node FIRST_NODE, Node SECOND_NODE, int WEIGHT)
+        {
+            Edge temp = new Edge(FIRST_NODE, SECOND_NODE, WEIGHT);
+            EdgeChanged += temp.HandleChange;
+            Edges.Add(temp);
+            OnIChanged();
+        }
+
+        public void OnNodeClicked(Node sender)
+        {
+            SelectedNode= sender;
+            OnIChanged();
+
+        }
+   
     }
 }

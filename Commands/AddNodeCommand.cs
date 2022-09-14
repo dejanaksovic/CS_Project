@@ -21,8 +21,7 @@ namespace GraphVisual.Commands
         }
         public override void Execute(object? parameter)
         {
-            _graph.AddNode(_graphControlViewModel.NodeValue, 0, 0);
-            
+            _graph.AddNode(_graphControlViewModel.NodeValue, 0, 0);           
         }
     }
 }

@@ -8,6 +8,9 @@ namespace GraphVisual.Models
 {
     public class Node
     {
+        public delegate void ClickedHandler(Node sender);
+        public event ClickedHandler Clicked;
+
         private string value;
         public string Value
         {
@@ -23,7 +26,7 @@ namespace GraphVisual.Models
         public Node(int ID, string VALUE, float POSX, float POSY)
         {
             this.ID = ID;
-            this.value = VALUE;
+            value = VALUE;
 
             PosX = POSX;
             PosY = POSY;
@@ -38,6 +41,11 @@ namespace GraphVisual.Models
         {
             if(this.ID == ID) 
             ChangeNodeValue(VALUE);
+        }
+
+        public void OnClick()
+        {
+            Clicked?.Invoke(this);
         }
 
     }

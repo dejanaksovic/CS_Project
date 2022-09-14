@@ -17,6 +17,8 @@ namespace GraphVisual.ViewModels
         public float PosXSecond => currentEdge.SecondNode.PosX + 15;
         public float PosYSecond => currentEdge.SecondNode.PosY + 15;
 
+        public int Weight => currentEdge.weight;
+
         public EdgeViewModel(Edge CURR_EDGE)
         {
             currentEdge = CURR_EDGE;

@@ -16,12 +16,11 @@ namespace GraphVisual.ViewModels
 
         public MainViewModel(Graph GRAPH)
         {
-            ViewModelBase CurrViewModel = new ViewModelBase();
-
+            
             GraphControl = new GraphControlViewModel(GRAPH);
             GraphSpace = new GraphSpaceViewModel(GRAPH);
 
-            CurrViewModel = GraphControl;
+            CurrentViewModel = GraphControl;
         }
     }
 }

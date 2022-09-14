@@ -1,35 +1,51 @@
-﻿using GraphVisual.Models;
+﻿using GraphVisual.Commands;
+using GraphVisual.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GraphVisual.ViewModels
 {
     class GraphSpaceViewModel : ViewModelBase
     {
-        
-        public ObservableCollection<NodeViewModel> ElipsesO { get; }
+        Graph _graph { set; get; }
+      
+        public ObservableCollection<NodeViewModel> ElipsesO { get; } = new ObservableCollection<NodeViewModel>();
 
-        public ObservableCollection<EdgeViewModel> EdgesO { get; }
+        public ObservableCollection<EdgeViewModel> EdgesO { get; } = new ObservableCollection<EdgeViewModel>();
 
         public GraphSpaceViewModel(Graph GRAPH)
         {
-            
-            Edge testEdge = new Edge( new Node(1, "da", 100, 150), new Node(1, "da", 180, 200), 1000);
-
-            EdgeViewModel testModel = new EdgeViewModel(testEdge);
-
-            EdgesO = new ObservableCollection<EdgeViewModel>();
-            EdgesO.Add(testModel);
-
-            ElipsesO = new ObservableCollection<NodeViewModel>();
-            ElipsesO.Add(new NodeViewModel(new Node(1, "da", 100, 150)));
-            ElipsesO.Add(new NodeViewModel(new Node(1, "da", 180, 200)));
+            _graph = GRAPH;
+            _graph.IChanged += GraphChanged;
+            ReloadNodes(_graph);
         }
 
-    }
+        public void GraphChanged(Graph sender)
+        {
+            ReloadNodes(sender);
+        }
 
+        public void ReloadNodes(Graph test)
+        {
+            ElipsesO.Clear();
+            EdgesO.Clear();
+
+            foreach (var item in test.Nodes)
+            {
+                ElipsesO.Add(new NodeViewModel(item));
+            }
+
+            foreach (var item in test.Edges)
+            {
+                EdgesO.Add(new EdgeViewModel(item));
+            }
+        }
+
+        
+    }
 }
