@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="GraphVisual.Views.Graph_space"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GraphVisual.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        <ItemsControl ItemsSource="{Binding EdgesO}">
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Line 
+                        X1="{Binding PosXFirst}"
+                        X2="{Binding PosXSecond}"
+                        Y1="{Binding PosYFirst}"
+                        Y2="{Binding PosYSecond}"
+                        Stroke="black" StrokeThickness="3"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <ItemsControl ItemsSource="{Binding ElipsesO}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Canvas.Left" Value="{Binding PosX}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding PosY}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Ellipse Width="30"
+                             Height="30"
+                             Stroke="Black"
+                             Fill="DarkOliveGreen"
+                             StrokeThickness="3"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+
+    </Grid>
+</UserControl>
