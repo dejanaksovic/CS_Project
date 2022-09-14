@@ -44,6 +44,12 @@ namespace GraphVisual.ViewModels
 
         public string NodeValue { get; set; }
 
+        public int SelectedId { get; set; }
+
+        public int Id_First { get; set; }
+        public int Id_Second { get; set; }
+
+        public int EdgeValue { get; set; }
 
         public ICommand AddNode { get; }
         public ICommand ChangeNode { get; }
@@ -56,6 +62,7 @@ namespace GraphVisual.ViewModels
 
             AddNode = new AddNodeCommand(this, GRAPH);
             ChangeNode = new ChangeNodeCommand(this, GRAPH);
+            AddEdge = new AddEdgeCommand(this, GRAPH);
         }
     }
 }

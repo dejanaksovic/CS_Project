@@ -10,7 +10,10 @@ namespace GraphVisual.Models
     public class Graph
     {
         public delegate void ChangeNodeHandler(int ID, string VALUE);
+        public delegate void ChangeEdgeHandler(int ID_FIRST, int ID_SECOND, int WEIGHT);
+
         public event ChangeNodeHandler NodeChanged;
+        public event ChangeEdgeHandler EdgeChanged;
 
         int currId = 0;
 
@@ -32,14 +35,21 @@ namespace GraphVisual.Models
             Nodes.Add(temp);
         }
 
-        public void AddEdge(Node FIRST_EDGE, Node SECOND_EDGE, int WEIGHT)
+        public void AddEdge(Node FIRST_NODE, Node SECOND_NODE, int WEIGHT)
         {
-            Edges.Add(new Edge(FIRST_EDGE, SECOND_EDGE, WEIGHT));
+            Edge temp = new Edge(FIRST_NODE, SECOND_NODE, WEIGHT);
+            EdgeChanged += temp.HandleChange;
+            Edges.Add(temp);
         }
 
         public void OnNodeChanged(int ID, string VALUE)
         {
             NodeChanged?.Invoke(ID, VALUE);
+        }
+
+        public void OnEdgeChanged(int ID_FIRST, int ID_SECOND, int WEIGHT)
+        {
+            EdgeChanged?.Invoke(ID_FIRST, ID_SECOND, WEIGHT);
         }
     }
 }

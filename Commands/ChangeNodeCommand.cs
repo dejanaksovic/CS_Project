@@ -11,15 +11,17 @@ namespace GraphVisual.Commands
     class ChangeNodeCommand : CommandBase
     { 
         Graph _graph { get; }
+        GraphControlViewModel _graphControlViewModel { get; }
 
         public ChangeNodeCommand(GraphControlViewModel graphControlViewModel, Graph GRAPH)
         {
             _graph = GRAPH;
+            _graphControlViewModel = graphControlViewModel;
         }
 
         public override void Execute(object? parameter)
         {
-            
+            _graph.OnNodeChanged(_graphControlViewModel.SelectedId, _graphControlViewModel.NodeValue);
         }
     }
 }
