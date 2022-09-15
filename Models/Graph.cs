@@ -32,16 +32,19 @@ namespace GraphVisual.Models
         public Graph(string Name)
         {
             this.Name = Name;
+            CurrentSelected = new Node(31, "LMAO", 12, 12);
         }
 
         public void OnNodeChanged(int ID, string VALUE)
         {
             NodeChanged?.Invoke(ID, VALUE);
+            OnIChanged();
         }
 
         public void OnEdgeChanged(int ID_FIRST, int ID_SECOND, int WEIGHT)
         {
             EdgeChanged?.Invoke(ID_FIRST, ID_SECOND, WEIGHT);
+            OnIChanged();
         }
 
         public void OnIChanged()
@@ -54,6 +57,7 @@ namespace GraphVisual.Models
             Node temp = new Node(currId++, VALUE, POSX, POSY);
             NodeChanged += temp.HandleChange;
             temp.Clicked += OnNodeClicked;
+            temp.IChanged += OnIChanged;
             Nodes.Add(temp);
             OnIChanged();
         }
@@ -68,7 +72,7 @@ namespace GraphVisual.Models
 
         public void OnNodeClicked(Node sender)
         {
-            SelectedNode= sender;
+            CurrentSelected = sender;
             OnIChanged();
 
         }

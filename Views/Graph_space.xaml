@@ -10,24 +10,41 @@
 
         <ItemsControl ItemsSource="{Binding EdgesO}">
 
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas                      
+                        Background="Transparent"
+                        AllowDrop="True"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Line 
+                    <Grid>
+                        <TextBlock Text="13"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                        <Line 
                         X1="{Binding PosXFirst}"
                         X2="{Binding PosXSecond}"
                         Y1="{Binding PosYFirst}"
                         Y2="{Binding PosYSecond}"
                         Stroke="black" StrokeThickness="3"/>
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
         <ItemsControl ItemsSource="{Binding ElipsesO}">
+          
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas/>
+                    <Canvas AllowDrop="True"
+                            Background="Transparent"
+                            DragOver="Node_Drop"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+
 
             <ItemsControl.ItemContainerStyle>
                 <Style TargetType="ContentPresenter">
@@ -39,32 +56,29 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="30"                            
-                          Height="30">
+                          Height="30"
+                          MouseMove="Node_MouseMove"
+                          >
                         <Grid.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding ClickedNodeCommand}"/>
                         </Grid.InputBindings>
                         <Ellipse
                              Stroke="Black"
-                             Fill="DarkOliveGreen"
-                             StrokeThickness="3">
+                             StrokeThickness="3"
+                             Fill="Orange">
                         </Ellipse>
                         <TextBlock
                                    Foreground="Red"
                                    TextAlignment="Center"
                                    VerticalAlignment="Center"
+                                   Text="{Binding Value}"
                                    >
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{} {0}  {1}">
-                                    <Binding Path="ID"/>
-                                    <Binding Path="Value"/>
-                                </MultiBinding>
-                            </TextBlock.Text>
                         </TextBlock>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
 
+        </ItemsControl>
 
     </Grid>
 </UserControl>

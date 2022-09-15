@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GraphVisual.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,11 +21,31 @@ namespace GraphVisual.Views
     /// </summary>
     public partial class Graph_space : UserControl
     {
+
         public Graph_space()
         {
             InitializeComponent();
         }
 
+        private void Node_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            if(e.LeftButton==MouseButtonState.Pressed && sender is FrameworkElement frameworkElement)
+            {
+                DragDrop.DoDragDrop(frameworkElement, new DataObject(DataFormats.Serializable, frameworkElement.DataContext), DragDropEffects.Move);
+            } 
+        }
+
+        private void Node_Drop(object sender, DragEventArgs e)
+        {
+            NodeViewModel Data = e.Data.GetData(DataFormats.Serializable) as NodeViewModel;
+            Canvas canvas = sender as Canvas;
+
+            Point myPoint = e.GetPosition(canvas);
+
+            Data.sampleNode.ChangePos((float)myPoint.X, (float)myPoint.Y);
+
+        }
 
     }
 }

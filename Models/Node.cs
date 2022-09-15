@@ -9,13 +9,16 @@ namespace GraphVisual.Models
     public class Node
     {
         public delegate void ClickedHandler(Node sender);
+        public delegate void IChangedHandlr();
+
         public event ClickedHandler Clicked;
+        public event IChangedHandlr IChanged;
 
         private string value;
         public string Value
         {
             get { return value; }
-            set { Value = value; }
+            set { this.value = value; }
         }
 
         public float PosX { get; set; }
@@ -26,7 +29,7 @@ namespace GraphVisual.Models
         public Node(int ID, string VALUE, float POSX, float POSY)
         {
             this.ID = ID;
-            value = VALUE;
+            Value = VALUE;
 
             PosX = POSX;
             PosY = POSY;
@@ -35,6 +38,7 @@ namespace GraphVisual.Models
         void ChangeNodeValue(string VALUE)
         {
             Value = VALUE;
+            OnIChanged();
         }
 
         public void HandleChange(int ID, string VALUE)
@@ -48,5 +52,16 @@ namespace GraphVisual.Models
             Clicked?.Invoke(this);
         }
 
+        public void ChangePos(float X, float Y)
+        {
+            PosX = X;
+            PosY = Y;
+            OnIChanged();
+        }
+
+        public void OnIChanged()
+        {
+            IChanged?.Invoke();
+        }
     }
 }

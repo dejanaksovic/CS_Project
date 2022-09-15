@@ -1,11 +1,13 @@
 ﻿using GraphVisual.Commands;
 using GraphVisual.Models;
+using GraphVisual.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GraphVisual.ViewModels
@@ -13,7 +15,7 @@ namespace GraphVisual.ViewModels
     class GraphSpaceViewModel : ViewModelBase
     {
         Graph _graph { set; get; }
-      
+
         public ObservableCollection<NodeViewModel> ElipsesO { get; } = new ObservableCollection<NodeViewModel>();
 
         public ObservableCollection<EdgeViewModel> EdgesO { get; } = new ObservableCollection<EdgeViewModel>();

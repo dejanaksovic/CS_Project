@@ -14,17 +14,20 @@ namespace GraphVisual.ViewModels
     {
         Graph _graph;
 
-        string _graphName;
-        public string GraphName
+        public string GraphName => _graph.Name;
+
+        string _currSelected;
+        public string CurrSelected
         {
-            get
-            {
-                return _graphName;
-            }
             set
             {
-                _graphName = value;
-                OnPropertyChanged(nameof(GraphName));
+                _currSelected = value;
+                OnPropertyChanged(nameof(CurrSelected));
+            }
+
+            get
+            {
+                return _currSelected;
             }
         }
 
@@ -45,9 +48,8 @@ namespace GraphVisual.ViewModels
         public GraphControlViewModel(Graph GRAPH)
         {
             _graph = GRAPH;
-            _graphName = GRAPH.Name;
             _graph.IChanged += OnGraphChanged;
-
+            CurrSelected = _graph.Name;
 
             AddNode = new AddNodeCommand(this, GRAPH);
             ChangeNode = new ChangeNodeCommand(this, GRAPH);
@@ -56,7 +58,8 @@ namespace GraphVisual.ViewModels
 
         public void OnGraphChanged(Graph sender)
         {
-            
+            CurrSelected = _graph.CurrentSelected.ID.ToString();
+            SelectedId = _graph.CurrentSelected.ID;
         }
     }
 }
