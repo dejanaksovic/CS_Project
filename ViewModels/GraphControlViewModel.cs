@@ -54,6 +54,7 @@ namespace GraphVisual.ViewModels
             AddNode = new AddNodeCommand(this, GRAPH);
             ChangeNode = new ChangeNodeCommand(this, GRAPH);
             AddEdge = new AddEdgeCommand(this, GRAPH);
+            FindTree = new FindTreeCommand(this, GRAPH);
         }
 
         public void OnGraphChanged(Graph sender)

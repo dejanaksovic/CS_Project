@@ -49,7 +49,7 @@ namespace GraphVisual.Models
 
         public void OnIChanged()
         {
-            IChanged?.Invoke(this);
+            IChanged?.Invoke(this);   
         }
 
         public void AddNode(string VALUE, float POSX, float POSY)
@@ -59,23 +59,39 @@ namespace GraphVisual.Models
             temp.Clicked += OnNodeClicked;
             temp.IChanged += OnIChanged;
             Nodes.Add(temp);
+
+            //Odmah slaganje edgeva, umesto da ih sortiram kasnije -- moram da implementiram IComperable da bih koristio metodu sort
+           
             OnIChanged();
+                      
         }
 
         public void AddEdge(Node FIRST_NODE, Node SECOND_NODE, int WEIGHT)
         {
             Edge temp = new Edge(FIRST_NODE, SECOND_NODE, WEIGHT);
-            EdgeChanged += temp.HandleChange;
-            Edges.Add(temp);
-            OnIChanged();
+            foreach(var item in Edges)
+            {
+                if (temp == item)
+                {
+                    System.Windows.MessageBox.Show("That edge already exists, please try other one");
+                        return;
+                }
+            }
+            
+             EdgeChanged += temp.HandleChange;
+             Edges.Add(temp);
+
+             OnIChanged();
+            
         }
 
         public void OnNodeClicked(Node sender)
         {
             CurrentSelected = sender;
             OnIChanged();
-
+            
         }
+
    
     }
 }

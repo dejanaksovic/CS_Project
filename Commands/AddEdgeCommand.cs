@@ -20,20 +20,20 @@ namespace GraphVisual.Commands
         }
         public override void Execute(object? parameter)
         {
+            //Mora var jer Linq uvek vraca ICollection valjda (neki interfejs :D ) i kasnije stavljamo prve clanove u node (jer prvi i samo postoje)
             var TempFirst = _graph.Nodes.Where(item => item.ID == _graphControlViewModel.Id_First);
             var TempSecond = _graph.Nodes.Where(item => item.ID == _graphControlViewModel.Id_Second);
 
-            Node a = TempFirst.First();
-            Node b = TempSecond.First();
-
-            //Mrak -> Nista ne radi, Popravi!
             try
             {
+                Node a = TempFirst.First();
+                Node b = TempSecond.First();
                 _graph.AddEdge(a, b, _graphControlViewModel.EdgeValue);
             }
+
             catch (Exception)
             {
-                MessageBox.Show("Proverite ponovo id-jeve ili postoji mogucnost da ta veza vec postoji");
+                System.Windows.MessageBox.Show("One or both nodes with that id do not exist");
             }
         }
     }

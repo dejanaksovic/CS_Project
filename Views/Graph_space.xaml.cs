@@ -27,6 +27,7 @@ namespace GraphVisual.Views
             InitializeComponent();
         }
 
+        //Haos lose, boli me dusa sto moram ovde da odradim, ali jos sam jako neiskusan po pitanju MMVM modela tako da drag-drop ostaje kao code behind u Graph_spaceView :C
         private void Node_MouseMove(object sender, MouseEventArgs e)
         {
 

@@ -18,7 +18,7 @@ namespace GraphVisual.Models
         {
             FirstNode = FIRST;
             SecondNode = SECOND;
-            weight= WEIGHT;
+            weight = WEIGHT;
         }
 
         void UpdateWeight(int WEIGHT)
@@ -28,10 +28,52 @@ namespace GraphVisual.Models
 
         public void HandleChange(int ID_FIRST, int ID_SECOND, int WEIGHT)
         {
-            if(ID_FIRST == FirstNode.ID && ID_SECOND == SecondNode.ID)
+            if (ID_FIRST == FirstNode.ID && ID_SECOND == SecondNode.ID)
             {
                 UpdateWeight(WEIGHT);
             }
+        }
+
+
+        public static bool operator ==(Edge first, Edge second)
+        {
+            if (first.FirstNode == second.FirstNode && first.SecondNode == second.SecondNode)
+                return true;
+
+            return false;
+        }
+
+        public static bool operator !=(Edge first, Edge second)
+        {
+            return !(first == second);
+        }
+
+        public static bool operator >(Edge first, Edge second)
+        {
+            if (first.weight > second.weight)
+                return true;
+            return false;
+        }
+
+        public static bool operator <(Edge first, Edge second)
+        {
+            return !(first > second);
+        }
+
+        public static bool operator <=(Edge left, Edge right)
+        {
+            if (left < right || left == right)
+                return true;
+
+            return false;
+        }
+
+        public static bool operator >=(Edge left, Edge right)
+        {
+            if (left > right || left == right)
+                return true;
+
+            return false;
         }
     }
 }

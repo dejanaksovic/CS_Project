@@ -1,0 +1,33 @@
+﻿using GraphVisual.Models;
+using GraphVisual.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GraphVisual.Commands
+{
+    internal class FindTreeCommand : CommandBase
+    {
+        private GraphControlViewModel graphControlViewModel;
+        private Graph _graph;
+
+        public FindTreeCommand(GraphControlViewModel graphControlViewModel, Graph gRAPH)
+        {
+            this.graphControlViewModel = graphControlViewModel;
+            this._graph = gRAPH;
+        }
+
+        public override void Execute(object? parameter)
+        {
+            string show = "";
+            foreach(var item in _graph.Edges)
+            {
+                show += item.weight;
+            }
+
+            System.Windows.MessageBox.Show(show);
+        }
+    }
+}

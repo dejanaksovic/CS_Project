@@ -131,7 +131,7 @@
                     TextAlignment="Center"/>
                 <TextBox
                     Height="40"
-                    Text="{Binding EdgeValue}"/>
+                    Text="{Binding EdgeValue, Mode=TwoWay}"/>
                 </StackPanel>
         </Grid>
 

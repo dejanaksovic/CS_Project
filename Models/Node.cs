@@ -43,8 +43,8 @@ namespace GraphVisual.Models
 
         public void HandleChange(int ID, string VALUE)
         {
-            if(this.ID == ID) 
-            ChangeNodeValue(VALUE);
+            if (this.ID == ID)
+                ChangeNodeValue(VALUE);
         }
 
         public void OnClick()
@@ -62,6 +62,18 @@ namespace GraphVisual.Models
         public void OnIChanged()
         {
             IChanged?.Invoke();
+        }
+
+        public static bool operator ==(Node first, Node second){
+            if (first.ID == second.ID)
+                return true;
+
+            return false;
+        }
+
+        public static bool operator !=(Node first, Node second)
+        {
+            return !(first == second);
         }
     }
 }

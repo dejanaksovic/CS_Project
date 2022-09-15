@@ -29,6 +29,7 @@
                         X2="{Binding PosXSecond}"
                         Y1="{Binding PosYFirst}"
                         Y2="{Binding PosYSecond}"
+                        Opacity=".5"
                         Stroke="black" StrokeThickness="3"/>
                     </Grid>
                 </DataTemplate>
@@ -55,8 +56,8 @@
 
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="30"                            
-                          Height="30"
+                    <Grid Width="50"
+                          Height="50"
                           MouseMove="Node_MouseMove"
                           >
                         <Grid.InputBindings>
