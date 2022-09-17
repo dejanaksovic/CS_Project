@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace GraphVisual.ViewModels
 {
@@ -14,7 +15,6 @@ namespace GraphVisual.ViewModels
     {
         public Node sampleNode;
 
-        public static readonly DependencyProperty DragDropCommandDepend = DependencyProperty.Register("DragDropCommand", typeof(ICommand), typeof(NodeViewModel));
         public ICommand ClickedNodeCommand { get; }
 
         public float PosX { get; set; }
@@ -23,6 +23,9 @@ namespace GraphVisual.ViewModels
 
         public string Value => sampleNode.Value;
 
+        public SolidColorBrush IsSelected => sampleNode.isSelected;
+        
+
         public string ID => sampleNode.ID.ToString();
 
         public NodeViewModel(Node INITIAL_NODE)
@@ -30,6 +33,7 @@ namespace GraphVisual.ViewModels
             sampleNode= INITIAL_NODE;
             PosX = sampleNode.PosX;
             PosY = sampleNode.PosY;
+
             ClickedNodeCommand = new ClickedNodeCommand(sampleNode);         
         }
         

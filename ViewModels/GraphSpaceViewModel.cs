@@ -21,7 +21,6 @@ namespace GraphVisual.ViewModels
 
         public ObservableCollection<EdgeViewModel> EdgesO { get; } = new ObservableCollection<EdgeViewModel>();
 
-
         public GraphSpaceViewModel(Graph GRAPH)
         {
             _graph = GRAPH;
@@ -48,6 +47,7 @@ namespace GraphVisual.ViewModels
             {
                 EdgesO.Add(new EdgeViewModel(item));
             }
+
         }
 
         

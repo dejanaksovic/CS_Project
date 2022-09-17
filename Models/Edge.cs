@@ -9,6 +9,8 @@ namespace GraphVisual.Models
 {
     public class Edge : IComparable
     {
+        public delegate void IClickedHandler (Edge sender);
+        public event IClickedHandler IClicked;
         public Node FirstNode { get; }
 
         public Node SecondNode { get; }
@@ -48,6 +50,25 @@ namespace GraphVisual.Models
                 return this.weight.CompareTo(otherEdge.weight);
             else
                 throw new ArgumentException("Object is not an Edge");
+        }
+
+        public void EdgeClicked()
+        {
+            IClicked?.Invoke(this);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null)
+                return false;
+            Edge testEdge = obj as Edge;
+
+            if(this.FirstNode.ID==testEdge.FirstNode.ID && this.SecondNode.ID == testEdge.SecondNode.ID)
+            {
+                return true;
+            }
+
+            return false;
         }
 
     }

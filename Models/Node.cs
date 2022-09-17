@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace GraphVisual.Models
 {
@@ -13,6 +14,8 @@ namespace GraphVisual.Models
 
         public event ClickedHandler Clicked;
         public event IChangedHandlr IChanged;
+
+        public SolidColorBrush isSelected = new SolidColorBrush(Colors.Orange);
 
         private string value;
         public string Value

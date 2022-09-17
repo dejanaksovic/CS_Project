@@ -40,12 +40,17 @@ namespace GraphVisual.ViewModels
 
         public string EdgeValue { get; set; }
 
+        public string SelectedEdge { set; get; }
+
         public ICommand AddNode { get; }
         public ICommand ChangeNode { get; }
-        public ICommand AddEdge { get; }
-        public ICommand FindTree { get; }
-
         public ICommand RemoveNode { get; }
+
+        public ICommand AddEdge { get; }
+        public ICommand ChangeEdge { get; }
+        public ICommand RemoveEdge { get; }
+
+        public ICommand FindTree { get; }
 
         public GraphControlViewModel(Graph GRAPH)
         {
@@ -55,13 +60,18 @@ namespace GraphVisual.ViewModels
 
             AddNode = new AddNodeCommand(this, GRAPH);
             ChangeNode = new ChangeNodeCommand(this, GRAPH);
+            RemoveNode = new RemoveNodeCommand(this, GRAPH);
+
             AddEdge = new AddEdgeCommand(this, GRAPH);
+            ChangeEdge = new ChangeEdgeWeightCommand(this, GRAPH);
+            RemoveEdge = new RemoveEdgeCommand(this, GRAPH);
+
             FindTree = new FindTreeCommand(this, GRAPH);
-            RemoveNode = new RemoveNodeCommand(this, GRAPH)
         }
 
         public void OnGraphChanged(Graph sender)
         {
+            SelectedEdge = _graph.SelectedEdge.FirstNode.Value + " " + _graph.SelectedEdge.SecondNode.Value;
             CurrSelected = _graph.CurrentSelected.ID.ToString();
             SelectedId = _graph.CurrentSelected.ID;
         }

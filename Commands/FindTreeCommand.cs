@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GraphVisual.Commands
 {
@@ -19,7 +20,7 @@ namespace GraphVisual.Commands
             this._graph = gRAPH;
         }
 
-        public override void Execute(object? parameter)
+        public override void  Execute(object? parameter)
         {
             _graph.FindTree();           
         }

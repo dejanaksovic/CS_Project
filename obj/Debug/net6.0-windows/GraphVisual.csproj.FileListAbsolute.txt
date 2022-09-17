@@ -54,3 +54,5 @@ C:\Users\PC\Desktop\Repos\CS_Project\obj\Debug\net6.0-windows\refint\GraphVisual
 C:\Users\PC\Desktop\Repos\CS_Project\obj\Debug\net6.0-windows\GraphVisual.pdb
 C:\Users\PC\Desktop\Repos\CS_Project\obj\Debug\net6.0-windows\GraphVisual.genruntimeconfig.cache
 C:\Users\PC\Desktop\Repos\CS_Project\obj\Debug\net6.0-windows\ref\GraphVisual.dll
+C:\Users\PC\Desktop\Repos\CS_Project\obj\Debug\net6.0-windows\Views\ListView.g.cs
+C:\Users\PC\Desktop\Repos\CS_Project\obj\Debug\net6.0-windows\Views\ListView.baml

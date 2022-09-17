@@ -13,6 +13,9 @@
     <Compile Update="Views\Graph_space.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Selected_control.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -25,6 +28,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Graph_space.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ListView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Selected_control.xaml">

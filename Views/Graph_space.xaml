@@ -25,6 +25,8 @@
                         <Line
                             Stroke="{Binding IsTree}"
                             StrokeThickness="3"
+                            IsHitTestVisible="True"
+                            Opacity=".5"
                             X1="{Binding PosXFirst}"
                             Y1="{Binding PosYFirst}"
                             X2="{Binding PosXSecond}"
@@ -65,7 +67,7 @@
                         <Ellipse
                              Stroke="Black"
                              StrokeThickness="3"
-                             Fill="Orange">
+                             Fill="{Binding IsSelected}">
                         </Ellipse>
                         <TextBlock
                                    Foreground="Red"

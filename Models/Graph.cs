@@ -27,14 +27,19 @@ namespace GraphVisual.Models
 
         public List<Edge> Edges { get; } = new List<Edge>();
 
+        public List<Edge> TreeEdges { get; set; } = new List<Edge>();
+
         public string Name { get; set; }
 
         public Node? SelectedNode;
 
+        public Edge? SelectedEdge;
+
         public Graph(string Name)
         {
             this.Name = Name;
-            CurrentSelected = new Node(31, "LMAO", 12, 12);
+            CurrentSelected = new Node(-15, "LMAO", 12, 12);
+            SelectedEdge = new Edge(new Node(-16, " ", 0, 0), new Node(-17, " ", 0, 0), 0);
         }
 
         public void AddNode(string VALUE, float POSX, float POSY)
@@ -51,16 +56,27 @@ namespace GraphVisual.Models
 
         public void RemoveNode(int ID)
         {
+            
             try
             {
-                Nodes.Remove(Nodes.Where(item => item.ID == ID).First());
-                OnIChanged();
+                //Zanimljiv errorcic, mora Edges.ToList(), zbog moguceg modifikovanja
+                foreach (var edge in Edges.ToList())
+                {
+                    if (edge.FirstNode.ID == ID || edge.SecondNode.ID == ID)
+                    {
+                        Edges.Remove(edge);
+                    }
+                }
+
+                Nodes.Remove(Nodes.Where(item => item.ID == ID).First());              
             }
 
             catch (Exception)
             {
                 MessageBox.Show("Node with that id does not exist");
             }
+
+            OnIChanged();
         }
 
         public void OnNodeChanged(int ID, string VALUE)
@@ -85,7 +101,7 @@ namespace GraphVisual.Models
             Edge temp = new Edge(FIRST_NODE, SECOND_NODE, WEIGHT);
             foreach(var item in Edges)
             {
-                if (temp == item)
+                if (item.Equals(temp))
                 {
                     System.Windows.MessageBox.Show("That edge already exists, please try other one");
                         return;
@@ -93,23 +109,63 @@ namespace GraphVisual.Models
             }
             
              EdgeChanged += temp.HandleChange;
+             temp.IClicked += OnEdgeClicked;
              Edges.Add(temp);
 
              OnIChanged();
             
         }
 
-        public void OnNodeClicked(Node sender)
+        public void RemoveEdge(Edge EDGE)
         {
-            CurrentSelected = sender;
+            try
+            {
+                Edges.Remove(EDGE);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("That edge doesnt exist");
+            }
             OnIChanged();
         }
 
+
+        public void OnNodeClicked(Node sender)
+        {
+            CurrentSelected = sender;
+            foreach(var item in Nodes)
+            {
+                if (item == sender)
+                {
+                    item.isSelected.Color = Colors.Coral;
+                    continue;
+                }
+                item.isSelected.Color = Colors.Orange;
+            }
+            OnIChanged();
+        }
+
+        public void OnEdgeClicked(Edge sender)
+        {
+            this.SelectedEdge = sender;
+            foreach(var item in Edges)
+            {
+                if (item == sender)
+                {
+                    sender.isTree.Color = Colors.Orange;
+                    continue;
+                }
+
+                item.isTree.Color = Colors.Black;
+            }
+            OnIChanged();
+        }
 
         public async Task FindTree()
         {
             Edges.Sort();
             List<Node> InsideNodes = new List<Node>();
+            List<Edge> InsideEdges = new List<Edge>();
 
 
             foreach (var item in Edges)
@@ -121,7 +177,10 @@ namespace GraphVisual.Models
                 await Task.Delay(500);
                 item.isTree.Color = Colors.Red;
                 OnIChanged();
-            }                   
+            }
+
+            TreeEdges = InsideEdges;
+            OnIChanged();
         }
    
     }

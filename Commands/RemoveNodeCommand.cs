@@ -16,10 +16,21 @@ namespace GraphVisual.Commands
         public RemoveNodeCommand(GraphControlViewModel _graphControlViewModel, Graph GRAPH)
         {
             _graph = GRAPH;
-            _graphControlViewModel = _graphControlViewModel;
+            this._graphControlViewModel = _graphControlViewModel;
         }
         public override void Execute(object? parameter)
         {
+            int tempId= new int();
+
+            
+                if (!(int.TryParse(_graphControlViewModel.CurrSelected, out tempId)))
+                    return;
+                else
+                {
+                    _graph.RemoveNode(tempId);
+                }
+           
+
             
         }
     }
