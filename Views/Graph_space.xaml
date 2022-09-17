@@ -20,17 +20,38 @@
 
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <TextBlock Text="13"
-                                   TextAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                        <Line 
-                        X1="{Binding PosXFirst}"
-                        X2="{Binding PosXSecond}"
-                        Y1="{Binding PosYFirst}"
-                        Y2="{Binding PosYSecond}"
-                        Opacity=".5"
-                        Stroke="black" StrokeThickness="3"/>
+                    <Grid
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Background="LightCoral"
+                        Margin="{Binding Margins}"
+                        Width="{Binding Width}"
+                        Height="{Binding Height}"
+                        >
+                       
+                        
+                        <TextBlock
+                            RenderTransformOrigin=".5 .5"
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Text="A">
+                            <TextBlock.RenderTransform>
+                                <RotateTransform Angle="90"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <Line
+                            Stroke="{Binding IsTree}"
+                            StrokeThickness="3"
+                            X1="0"
+                            Y1="0"
+                            X2="{Binding Width}"
+                            Y2="{Binding Height}"
+                            >
+                            <Line.RenderTransform>
+                                <RotateTransform Angle="90"/>
+                            </Line.RenderTransform>
+                        </Line>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

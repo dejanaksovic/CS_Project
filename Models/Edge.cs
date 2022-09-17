@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace GraphVisual.Models
 {
-    public class Edge
+    public class Edge : IComparable
     {
         public Node FirstNode { get; }
 
@@ -14,11 +15,14 @@ namespace GraphVisual.Models
 
         public int weight { get; set; }
 
+        public SolidColorBrush isTree { set; get; }
+
         public Edge(Node FIRST, Node SECOND, int WEIGHT)
         {
             FirstNode = FIRST;
             SecondNode = SECOND;
             weight = WEIGHT;
+            isTree = new SolidColorBrush(Colors.Black);
         }
 
         void UpdateWeight(int WEIGHT)
@@ -34,46 +38,17 @@ namespace GraphVisual.Models
             }
         }
 
-
-        public static bool operator ==(Edge first, Edge second)
+        public int CompareTo(object? obj)
         {
-            if (first.FirstNode == second.FirstNode && first.SecondNode == second.SecondNode)
-                return true;
+            if (obj == null)
+                return 1;
 
-            return false;
+            Edge otherEdge = obj as Edge;
+            if (otherEdge != null)
+                return this.weight.CompareTo(otherEdge.weight);
+            else
+                throw new ArgumentException("Object is not an Edge");
         }
 
-        public static bool operator !=(Edge first, Edge second)
-        {
-            return !(first == second);
-        }
-
-        public static bool operator >(Edge first, Edge second)
-        {
-            if (first.weight > second.weight)
-                return true;
-            return false;
-        }
-
-        public static bool operator <(Edge first, Edge second)
-        {
-            return !(first > second);
-        }
-
-        public static bool operator <=(Edge left, Edge right)
-        {
-            if (left < right || left == right)
-                return true;
-
-            return false;
-        }
-
-        public static bool operator >=(Edge left, Edge right)
-        {
-            if (left > right || left == right)
-                return true;
-
-            return false;
-        }
     }
 }

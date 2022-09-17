@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace GraphVisual.Models
 {
@@ -59,8 +61,6 @@ namespace GraphVisual.Models
             temp.Clicked += OnNodeClicked;
             temp.IChanged += OnIChanged;
             Nodes.Add(temp);
-
-            //Odmah slaganje edgeva, umesto da ih sortiram kasnije -- moram da implementiram IComperable da bih koristio metodu sort
            
             OnIChanged();
                       
@@ -88,10 +88,27 @@ namespace GraphVisual.Models
         public void OnNodeClicked(Node sender)
         {
             CurrentSelected = sender;
-            OnIChanged();
-            
+            OnIChanged();           
         }
 
+
+        public async Task FindTree()
+        {
+            Edges.Sort();
+            List<Node> InsideNodes = new List<Node>();
+
+
+            foreach (var item in Edges)
+            {
+                if (InsideNodes.Contains(item.FirstNode) && InsideNodes.Contains(item.SecondNode))
+                   continue;
+                InsideNodes.Add(item.FirstNode);
+                InsideNodes.Add(item.SecondNode);
+                await Task.Delay(500);
+                item.isTree.Color = Colors.Red;
+                OnIChanged();
+            }                   
+        }
    
     }
 }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace GraphVisual.ViewModels
 {
@@ -19,6 +20,7 @@ namespace GraphVisual.ViewModels
         public ObservableCollection<NodeViewModel> ElipsesO { get; } = new ObservableCollection<NodeViewModel>();
 
         public ObservableCollection<EdgeViewModel> EdgesO { get; } = new ObservableCollection<EdgeViewModel>();
+
 
         public GraphSpaceViewModel(Graph GRAPH)
         {

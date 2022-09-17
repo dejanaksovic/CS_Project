@@ -35,10 +35,10 @@ namespace GraphVisual.ViewModels
 
         public int SelectedId { get; set; }
 
-        public int Id_First { get; set; }
-        public int Id_Second { get; set; }
+        public string Id_First { get; set; }
+        public string Id_Second { get; set; }
 
-        public int EdgeValue { get; set; }
+        public string EdgeValue { get; set; }
 
         public ICommand AddNode { get; }
         public ICommand ChangeNode { get; }
@@ -49,7 +49,7 @@ namespace GraphVisual.ViewModels
         {
             _graph = GRAPH;
             _graph.IChanged += OnGraphChanged;
-            CurrSelected = _graph.Name;
+            CurrSelected = "";
 
             AddNode = new AddNodeCommand(this, GRAPH);
             ChangeNode = new ChangeNodeCommand(this, GRAPH);

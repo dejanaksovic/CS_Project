@@ -23,7 +23,6 @@ namespace GraphVisual
         public MainWindow()
         {
             myGraph = new Graph("Dekili");
-            myGraph.AddNode("Lol", 30, 30);
 
             InitializeComponent();
             DataContext = new MainViewModel(myGraph);

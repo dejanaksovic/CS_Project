@@ -21,13 +21,7 @@ namespace GraphVisual.Commands
 
         public override void Execute(object? parameter)
         {
-            string show = "";
-            foreach(var item in _graph.Edges)
-            {
-                show += item.weight;
-            }
-
-            System.Windows.MessageBox.Show(show);
+            _graph.FindTree();           
         }
     }
 }
