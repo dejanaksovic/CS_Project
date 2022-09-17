@@ -37,6 +37,32 @@ namespace GraphVisual.Models
             CurrentSelected = new Node(31, "LMAO", 12, 12);
         }
 
+        public void AddNode(string VALUE, float POSX, float POSY)
+        {
+            Node temp = new Node(currId++, VALUE, POSX, POSY);
+            NodeChanged += temp.HandleChange;
+            temp.Clicked += OnNodeClicked;
+            temp.IChanged += OnIChanged;
+            Nodes.Add(temp);
+
+            OnIChanged();
+
+        }
+
+        public void RemoveNode(int ID)
+        {
+            try
+            {
+                Nodes.Remove(Nodes.Where(item => item.ID == ID).First());
+                OnIChanged();
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Node with that id does not exist");
+            }
+        }
+
         public void OnNodeChanged(int ID, string VALUE)
         {
             NodeChanged?.Invoke(ID, VALUE);
@@ -52,18 +78,6 @@ namespace GraphVisual.Models
         public void OnIChanged()
         {
             IChanged?.Invoke(this);   
-        }
-
-        public void AddNode(string VALUE, float POSX, float POSY)
-        {
-            Node temp = new Node(currId++, VALUE, POSX, POSY);
-            NodeChanged += temp.HandleChange;
-            temp.Clicked += OnNodeClicked;
-            temp.IChanged += OnIChanged;
-            Nodes.Add(temp);
-           
-            OnIChanged();
-                      
         }
 
         public void AddEdge(Node FIRST_NODE, Node SECOND_NODE, int WEIGHT)
@@ -88,7 +102,7 @@ namespace GraphVisual.Models
         public void OnNodeClicked(Node sender)
         {
             CurrentSelected = sender;
-            OnIChanged();           
+            OnIChanged();
         }
 
 

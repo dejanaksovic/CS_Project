@@ -45,6 +45,8 @@ namespace GraphVisual.ViewModels
         public ICommand AddEdge { get; }
         public ICommand FindTree { get; }
 
+        public ICommand RemoveNode { get; }
+
         public GraphControlViewModel(Graph GRAPH)
         {
             _graph = GRAPH;
@@ -55,6 +57,7 @@ namespace GraphVisual.ViewModels
             ChangeNode = new ChangeNodeCommand(this, GRAPH);
             AddEdge = new AddEdgeCommand(this, GRAPH);
             FindTree = new FindTreeCommand(this, GRAPH);
+            RemoveNode = new RemoveNodeCommand(this, GRAPH)
         }
 
         public void OnGraphChanged(Graph sender)
