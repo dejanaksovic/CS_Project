@@ -15,6 +15,8 @@ namespace GraphVisual.Models
         public event ClickedHandler Clicked;
         public event IChangedHandlr IChanged;
 
+        public int graph_id;
+
         public SolidColorBrush isSelected = new SolidColorBrush(Colors.Orange);
 
         private string value;
@@ -29,13 +31,14 @@ namespace GraphVisual.Models
 
         public int ID { get; }
 
-        public Node(int ID, string VALUE, float POSX, float POSY)
+        public Node(int ID, string VALUE, float POSX, float POSY, int graph_id)
         {
             this.ID = ID;
             Value = VALUE;
 
             PosX = POSX;
             PosY = POSY;
+            this.graph_id = graph_id;
         }
 
         void ChangeNodeValue(string VALUE)

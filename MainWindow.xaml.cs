@@ -22,7 +22,7 @@ namespace GraphVisual
         private readonly Graph myGraph;
         public MainWindow()
         {
-            myGraph = new Graph("Dekili");
+            myGraph = new Graph("TestGraph", 0);
 
             InitializeComponent();
             DataContext = new MainViewModel(myGraph);

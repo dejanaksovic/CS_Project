@@ -7,12 +7,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Data.SqlClient;
+using System.Data;
+using System.Windows.Navigation;
+using GraphVisual.Utilities;
 
 namespace GraphVisual.ViewModels
 {
     public class GraphControlViewModel : ViewModelBase
     {
         Graph _graph;
+
+        public string ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\PC\\Desktop\\Repos\\CS_Project\\DataBase\\Database1.mdf;Integrated Security=True";
 
         public string GraphName => _graph.Name;
 
@@ -52,6 +58,10 @@ namespace GraphVisual.ViewModels
 
         public ICommand FindTree { get; }
 
+
+        public ICommand NewGraph { get; }
+        public ICommand InsertGraph { get; }
+
         public GraphControlViewModel(Graph GRAPH)
         {
             _graph = GRAPH;
@@ -67,6 +77,9 @@ namespace GraphVisual.ViewModels
             RemoveEdge = new RemoveEdgeCommand(this, GRAPH);
 
             FindTree = new FindTreeCommand(this, GRAPH);
+
+            InsertGraph = new InsertGraphCommand(this, GRAPH);
+            NewGraph = new InsertGraphCommand(this, GRAPH);
         }
 
         public void OnGraphChanged(Graph sender)
@@ -75,5 +88,6 @@ namespace GraphVisual.ViewModels
             CurrSelected = _graph.CurrentSelected.ID.ToString();
             SelectedId = _graph.CurrentSelected.ID;
         }
+
     }
 }

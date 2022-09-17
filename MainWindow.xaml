@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphVisual" xmlns:views="clr-namespace:GraphVisual.Views"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="GraphVis" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>

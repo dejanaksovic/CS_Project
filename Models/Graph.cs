@@ -11,6 +11,8 @@ namespace GraphVisual.Models
 {
     public class Graph
     {
+        public int ID { get; }
+
         public delegate void ChangeNodeHandler(int ID, string VALUE);
         public delegate void ChangeEdgeHandler(int ID_FIRST, int ID_SECOND, int WEIGHT);
         public delegate void IChangedHandler(Graph source);
@@ -35,16 +37,17 @@ namespace GraphVisual.Models
 
         public Edge? SelectedEdge;
 
-        public Graph(string Name)
+        public Graph(string Name, int ID)
         {
+            this.ID = ID;
             this.Name = Name;
-            CurrentSelected = new Node(-15, "LMAO", 12, 12);
-            SelectedEdge = new Edge(new Node(-16, " ", 0, 0), new Node(-17, " ", 0, 0), 0);
+            CurrentSelected = new Node(-15, "LMAO", 12, 12, -1);
+            SelectedEdge = new Edge(new Node(-16, " ", 0, 0, -1), new Node(-17, " ", 0, 0, -1), 0);
         }
 
         public void AddNode(string VALUE, float POSX, float POSY)
         {
-            Node temp = new Node(currId++, VALUE, POSX, POSY);
+            Node temp = new Node(currId++, VALUE, POSX, POSY, this.ID);
             NodeChanged += temp.HandleChange;
             temp.Clicked += OnNodeClicked;
             temp.IChanged += OnIChanged;

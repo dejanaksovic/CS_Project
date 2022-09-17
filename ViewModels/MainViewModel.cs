@@ -9,6 +9,7 @@ namespace GraphVisual.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+
         public ViewModelBase CurrentViewModel { get;}
 
         public ViewModelBase GraphSpace { get; }
