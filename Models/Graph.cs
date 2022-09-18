@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GraphVisual.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace GraphVisual.Models
 {
     public class Graph
     {
-        public int ID { get; }
+        public int ID { get; set; }
 
         public delegate void ChangeNodeHandler(int ID, string VALUE);
         public delegate void ChangeEdgeHandler(int ID_FIRST, int ID_SECOND, int WEIGHT);
@@ -21,7 +22,7 @@ namespace GraphVisual.Models
         public event ChangeEdgeHandler EdgeChanged;
         public event IChangedHandler IChanged;
 
-        int currId = 0;
+        public int currId = 0;
 
         public Node CurrentSelected { set; get; }
 
@@ -41,8 +42,9 @@ namespace GraphVisual.Models
         {
             this.ID = ID;
             this.Name = Name;
-            CurrentSelected = new Node(-15, "LMAO", 12, 12, -1);
-            SelectedEdge = new Edge(new Node(-16, " ", 0, 0, -1), new Node(-17, " ", 0, 0, -1), 0);
+            CurrentSelected = new Node(-1, "", -1, -1, -1);
+            SelectedNode = new Node(-1, "", -1, -1, -1);
+            SelectedEdge = new Edge(new Node(-1, "", -1, -1, -1), new Node(-1, "", -1, -1, -1), -1); 
         }
 
         public void AddNode(string VALUE, float POSX, float POSY)
@@ -121,24 +123,20 @@ namespace GraphVisual.Models
 
         public void RemoveEdge(Edge EDGE)
         {
-            try
-            {
-                Edges.Remove(EDGE);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("That edge doesnt exist");
-            }
+            
+            Edges.Remove(EDGE);
+                      
             OnIChanged();
         }
 
 
         public void OnNodeClicked(Node sender)
         {
+            SelectedNode = sender;
             CurrentSelected = sender;
             foreach(var item in Nodes)
             {
-                if (item == sender)
+                if (item.ID == sender.ID)
                 {
                     item.isSelected.Color = Colors.Coral;
                     continue;
@@ -160,6 +158,35 @@ namespace GraphVisual.Models
                 }
 
                 item.isTree.Color = Colors.Black;
+            }
+            OnIChanged();
+        }
+
+        public void Reset(string NAME)
+        {
+            CurrentSelected = new Node(-1, "", -1, -1, -1);
+            SelectedNode = new Node(-1, "", -1, -1, -1);
+            SelectedEdge = new Edge(new Node(-1, "", -1, -1, -1), new Node(-1, "", -1, -1, -1), -1);
+            Name = NAME;
+            ID = Helper.GetIdFromGraph();
+            Nodes.Clear();
+            Edges.Clear();
+
+            OnIChanged();
+        }
+
+        public void ResetNew(Graph GRAPH)
+        {
+            Reset(GRAPH.Name);
+            ID = GRAPH.ID;
+            currId = GRAPH.currId;
+            foreach(var item in GRAPH.Nodes)
+            {
+                Nodes.Add(item);
+            }
+            foreach(var item in GRAPH.Edges)
+            {
+                Edges.Add(item);
             }
             OnIChanged();
         }

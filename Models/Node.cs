@@ -71,6 +71,7 @@ namespace GraphVisual.Models
         }
 
         public static bool operator ==(Node first, Node second) {
+
             if (first.ID == second.ID)
                 return true;
 

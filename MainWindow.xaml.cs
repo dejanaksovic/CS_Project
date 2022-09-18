@@ -1,4 +1,5 @@
 ﻿using GraphVisual.Models;
+using GraphVisual.Utilities;
 using GraphVisual.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace GraphVisual
         private readonly Graph myGraph;
         public MainWindow()
         {
-            myGraph = new Graph("TestGraph", 0);
+            myGraph = new Graph("TestGraph", Helper.GetIdFromGraph());
 
             InitializeComponent();
             DataContext = new MainViewModel(myGraph);

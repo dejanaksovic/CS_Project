@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Ink;
 
 namespace GraphVisual.Commands
@@ -23,7 +24,15 @@ namespace GraphVisual.Commands
 
         public override void Execute(object? parameter)
         {
-            gRAPH = new Graph("Test ime", Helper.ID);
+            try
+            {
+                Helper.InsertGraph(gRAPH);
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Unvalid input, please try making a new graph");
+            }
         }
     }
 }

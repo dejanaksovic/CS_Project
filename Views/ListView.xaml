@@ -22,10 +22,16 @@
                             <ListViewItem.InputBindings>
                                 <MouseBinding Gesture="LeftClick" Command="{Binding ClickedNodeCommand}"/>
                             </ListViewItem.InputBindings>
-                    <TextBlock 
+                            <TextBlock 
                         HorizontalAlignment="Stretch"
-                        TextAlignment="Center"
-                        Text="{Binding Value}"/>
+                        TextAlignment="Center">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{} {0} : {1}">
+                                        <Binding Path="ID"/>
+                                        <Binding Path="Value"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
                         </ListViewItem>
                     </DataTemplate>
             </ListView.ItemTemplate>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GraphVisual.Commands
 {
@@ -22,13 +23,16 @@ namespace GraphVisual.Commands
         {
             int tempId= new int();
 
-            
-                if (!(int.TryParse(_graphControlViewModel.CurrSelected, out tempId)))
-                    return;
-                else
-                {
-                    _graph.RemoveNode(tempId);
-                }
+
+            if (!(int.TryParse(_graphControlViewModel.CurrSelected, out tempId)))
+            {
+                return;
+            }
+            else
+            {
+
+                _graph.RemoveNode(tempId);
+            }
            
 
             
